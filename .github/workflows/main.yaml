@@ -18,7 +18,7 @@ jobs:
     - name: docker
       run: |
         docker build -t test/windows .
-        docker run test/windows
+        docker run test/windows cmd.exe /s /c echo "ok windows"
   # dkr_macos:
   #   runs-on: macos-latest
   #   steps:
