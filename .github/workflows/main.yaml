@@ -1,0 +1,11 @@
+name: CI
+
+on: [push]
+
+jobs:
+  lint_commit:
+    runs-on: ubuntu
+    steps:
+    - name: docker
+      run: |
+        docker run hello-world
