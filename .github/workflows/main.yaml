@@ -3,8 +3,20 @@ name: CI
 on: [push]
 
 jobs:
-  lint_commit:
-    runs-on: ubuntu
+  dkr_linux:
+    runs-on: ubuntu-latest
+    steps:
+    - name: docker
+      run: |
+        docker run hello-world
+  dkr_windows:
+    runs-on: windows-latest
+    steps:
+    - name: docker
+      run: |
+        docker run hello-world
+  dkr_macos:
+    runs-on: macos-latest
     steps:
     - name: docker
       run: |
