@@ -17,8 +17,13 @@ jobs:
         fetch-depth: 2
     - name: docker
       run: |
-        docker build -t test/windows .
-        docker run test/windows cmd.exe /s /c echo "ok windows"
+        docker info
+        # docker build -t test/windows .
+        # docker run test/windows cmd.exe /s /c echo "ok windows"
+        & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchDaemon
+        docker info
+        .\dockercli.exe -SwitchLinuxEngine
+        docker run alpine apk --version
   # dkr_macos:
   #   runs-on: macos-latest
   #   steps:
