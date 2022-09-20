@@ -12,9 +12,13 @@ jobs:
   dkr_windows:
     runs-on: windows-latest
     steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
     - name: docker
       run: |
-        docker run hello-world
+        docker build -t test/windows .
+        docker run test/windows
   # dkr_macos:
   #   runs-on: macos-latest
   #   steps:
@@ -25,15 +29,15 @@ jobs:
   #       podman machine start
   #       podman info
   #       podman run docker.io/library/hello-world
-  dkr_macos:
-    runs-on: macos-latest
-    steps:
-    - name: docker
-      run: |
-        brew install virtualbox docker docker-machine
-        sudo /Library/StartupItems/VirtualBox/VirtualBox restart
-        docker-machine create --virtualbox-cpu-count "2" --virtualbox-memory "1024" --virtualbox-disk-size "2000" default
-        docker-machine env
-        eval $(docker-machine env)
-        export DOCKER_HOST_IP=`echo ${DOCKER_HOST} | cut -d '/' -f 3 | cut -d ':' -f 1`
-        docker run hello-world
+  # dkr_macos:
+  #   runs-on: macos-latest
+  #   steps:
+  #   - name: docker
+  #     run: |
+  #       brew install virtualbox docker docker-machine
+  #       sudo /Library/StartupItems/VirtualBox/VirtualBox restart
+  #       docker-machine create --virtualbox-cpu-count "2" --virtualbox-memory "1024" --virtualbox-disk-size "2000" default
+  #       docker-machine env
+  #       eval $(docker-machine env)
+  #       export DOCKER_HOST_IP=`echo ${DOCKER_HOST} | cut -d '/' -f 3 | cut -d ':' -f 1`
+  #       docker run hello-world
