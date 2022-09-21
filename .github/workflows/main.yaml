@@ -31,18 +31,20 @@ jobs:
   #       docker info
   #       .\dockercli.exe -SwitchLinuxEngine
   #       docker run alpine apk --version
-  # dkr_macos:
-  #   runs-on: macos-latest
-  #   steps:
-  #   - name: docker
-  #     run: |
-  #       brew install podman
-  #       podman machine init
-  #       podman machine start
-  #       podman info
-  #       podman run docker.io/library/hello-world
   dkr_macos:
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
-    - run: |
-        sysctl -a
+    - name: docker
+      run: |
+        brew install docker-machine docker
+        docker-machine create --virtualbox-cpu-count "2" --virtualbox-memory "1024" --virtualbox-disk-size "2000" default --host-only-cidr='192.168.59.1/24'
+        docker-machine env
+        eval $(docker-machine env)
+        export DOCKER_HOST_IP=`echo ${DOCKER_HOST} | cut -d '/' -f 3 | cut -d ':' -f 1`
+        docker run --rm hello-world
+
+  # dkr_macos:
+  #   runs-on: macos-12
+  #   steps:
+  #   - run: |
+  #       sysctl -a
