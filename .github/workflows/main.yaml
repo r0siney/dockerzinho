@@ -8,7 +8,14 @@ jobs:
     steps:
     - name: docker
       run: |
-        docker run hello-world
+        lscpu
+  dkr_windows:
+    runs-on: windows-latest
+    steps:
+      - name: check hyper v
+        shell: pwsh
+        run: |
+          Get-ComputerInfo -property "HyperV*"
   # dkr_windows:
   #   runs-on: windows-latest
   #   steps:
@@ -37,8 +44,5 @@ jobs:
   dkr_macos:
     runs-on: macos-latest
     steps:
-    - uses: docker-practice/actions-setup-docker@master
     - run: |
-        set -x
-        docker version
-        docker run --rm hello-world
+        sysctl -a
