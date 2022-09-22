@@ -36,7 +36,8 @@ jobs:
     steps:
     - name: docker
       run: |
-        brew install docker
+        brew install docker colima
+        colima start
         docker --version
         docker run hello-world
 
