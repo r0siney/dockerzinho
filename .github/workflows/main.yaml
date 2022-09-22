@@ -36,12 +36,9 @@ jobs:
     steps:
     - name: docker
       run: |
-        brew install docker-machine docker
-        docker-machine create --virtualbox-cpu-count "2" --virtualbox-memory "1024" --virtualbox-disk-size "2000" --virtualbox-hostonly-cidr 192.168.56.1/21 default
-        docker-machine env
-        eval $(docker-machine env)
-        export DOCKER_HOST_IP=`echo ${DOCKER_HOST} | cut -d '/' -f 3 | cut -d ':' -f 1`
-        docker run --rm hello-world
+        brew install docker
+        docker --version
+        docker run hello-world
 
   # dkr_macos:
   #   runs-on: macos-12
