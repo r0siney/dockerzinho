@@ -10,7 +10,7 @@ info = client.info()
 print(f"SYSTEM: {info['OSType']}")
 
 if info["OSType"] == "windows":
-    image = "mcr.microsoft.com/windows/nanoserver:ltsc2019"
+    image = "mcr.microsoft.com/windows/nanoserver:ltsc2022"
     cmd = """\
 @echo off
 ver
